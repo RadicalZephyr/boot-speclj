@@ -2,11 +2,12 @@
  :source-paths #{"src"}
  :dependencies '[[org.clojure/clojure     "1.8.0"           :scope "provided"]
                  [boot/core               "2.5.5"           :scope "provided"]
-                 [radicalzephyr/bootlaces "0.1.15-SNAPSHOT" :scope "test"]])
+                 [radicalzephyr/bootlaces "0.1.15-SNAPSHOT" :scope "test"]
+                 [speclj                  "3.3.2"]])
 
 
 (require '[radicalzephyr.bootlaces :refer :all]
-         '[radicalzephyr.boot-speclj :refer [speclj]])
+         '[radicalzephyr.boot-speclj :refer [spec]])
 
 (def +version+ "0.1.0")
 

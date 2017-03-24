@@ -22,13 +22,14 @@
   Don't use the vigilant runner.  Use the watch task instead: `boot watch spec`."
   [c clojure   VERSION   str     "The version of Clojure for testing."
    p paths     PATH      #{str}  "Conj onto the set of paths to run specs from"
-   r runner    RUNNER    str     "The name of the runner to use"
-   R reporters REPORTERS #{str}  "Conj onto the set of reporters to use"
+   f formats   FORMAT    #{str}  "Alias for reporters"
+   r reporters REPORTERS #{str}  "Conj onto the set of reporters to use"
+   R runner    RUNNER    str     "The name of the runner to use"
    t tags      TAG       #{str}  "Conj onto the set of tags to run"
    o omit                bool    "Flag indicating whether to omit pending specs"]
   (let [paths     (or (seq paths)     ["spec"])
         runner    (or runner           "standard")
-        reporters (or (seq reporters) ["progress"])
+        reporters (or (seq (into reporters formats)) ["progress"])
         pod-deps (update-in (core/get-env) [:dependencies]
                             (fn [deps]
                               (cond->> (into deps (pod-deps))

@@ -17,7 +17,9 @@
   (if (= 'org.clojure/clojure artifact) [artifact new-version] dep))
 
 (deftask spec
-  "Run speclj tests in a pod."
+  "Speclj - pronounced \"speckle\": a TDD/BDD framework for Clojure.
+
+  Don't use the vigilant runner.  Use the watch task instead: `boot watch spec`."
   [c clojure   VERSION   str     "The version of Clojure for testing."
    p paths     PATH      #{str}  "Conj onto the set of paths to run specs from"
    r runner    RUNNER    str     "The name of the runner to use"

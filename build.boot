@@ -1,16 +1,11 @@
 (set-env!
- :source-paths #{"src"}
+ :resource-paths #{"src"}
  :dependencies '[[org.clojure/clojure     "1.8.0"           :scope "provided"]
-                 [boot/core               "2.5.5"           :scope "provided"]
-                 [radicalzephyr/bootlaces "0.1.15-SNAPSHOT" :scope "test"]])
+                 [boot/core               "2.5.5"           :scope "provided"]])
 
-
-(require '[radicalzephyr.bootlaces :refer :all]
-         '[radicalzephyr.boot-speclj :refer [spec]])
+(require '[radicalzephyr.boot-speclj :refer [spec]])
 
 (def +version+ "0.2.0")
-
-(bootlaces! +version+)
 
 (task-options!
  pom {:project 'radicalzephyr/boot-speclj

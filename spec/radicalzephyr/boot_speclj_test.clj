@@ -6,4 +6,7 @@
     (should= true true))
 
   (it "fail"
+    (should= true false))
+
+  (xit "pending"
     (should= true false)))

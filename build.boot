@@ -19,5 +19,5 @@
       :description "Run speclj tests in boot."
       :url "https://github.com/radicalzephyr/boot-speclj"
       :scm {:url "https://github.com/radicalzephyr/boot-speclj"}
-      :license {"Eclipse Public License"
-                "http://www.eclipse.org/legal/epl-v10.html"}})
+      :license {"MIT License"
+                "http://www.opensource.org/licenses/mit-license.php"}})

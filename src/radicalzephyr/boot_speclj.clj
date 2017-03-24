@@ -18,11 +18,16 @@
 
 (deftask spec
   "Run speclj tests in a pod."
-  [c clojure  VERSION  str      "the version of Clojure for testing."
-   r runner   RUNNER   str      "the name of the runner to use"
-   t tags     TAG      #{str}   "assoc into the set of tags to run"
-   o omit              boolean  "whether to omit pending specs"]
-  (let [pod-deps (update-in (core/get-env) [:dependencies]
+  [c clojure   VERSION   str     "The version of Clojure for testing."
+   p paths     PATH      #{str}  "Conj onto the set of paths to run specs from"
+   r runner    RUNNER    str     "The name of the runner to use"
+   R reporters REPORTERS #{str}  "Conj onto the set of reporters to use"
+   t tags      TAG       #{str}  "Conj onto the set of tags to run"
+   o omit                bool    "Flag indicating whether to omit pending specs"]
+  (let [paths     (or (seq paths)     ["spec"])
+        runner    (or runner           "standard")
+        reporters (or (seq reporters) ["progress"])
+        pod-deps (update-in (core/get-env) [:dependencies]
                             (fn [deps]
                               (cond->> (into deps (pod-deps))
                                 clojure (mapv (partial replace-clojure-version clojure)))))
@@ -31,9 +36,9 @@
     (core/cleanup (pods :shutdown))
     (core/with-pass-thru [fs]
       (pod/with-eval-in (pods)
-       (cli/do-specs {:specs ["spec"]
-                      :runner "standard"
-                      :reporters ["progress"]
-                      :tags []
-                      :omit-pending false}))
+        (cli/do-specs {:specs ~(vec paths)
+                       :runner ~runner
+                       :reporters ~(vec reporters)
+                       :tags ~tags
+                       :omit-pending ~omit}))
       (pods :refresh))))
